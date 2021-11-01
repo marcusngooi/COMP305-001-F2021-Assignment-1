@@ -1,18 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class VirtualCameraController : MonoBehaviour
 {
+    // private variables
+    private List<GameObject> virtualCameras = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        virtualCameras.Clear();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            virtualCameras.Add(transform.GetChild(i).gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TransitionTo(GameObject cameraToTransitionTo)
     {
-        
+        foreach (GameObject g in virtualCameras)
+        {
+            if (g == cameraToTransitionTo)
+            {
+                // Transition to that camera
+                g.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+            }
+            else
+            {
+                //De-prioritize camera
+                g.GetComponent<CinemachineVirtualCamera>().Priority = 5;
+            }
+        }
     }
 }

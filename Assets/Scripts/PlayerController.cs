@@ -30,8 +30,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // For testing
+        //float horiz = Input.GetAxis("Horizontal");
+        //rBody.velocity = new Vector2(horiz * speed, rBody.velocity.y);
+
+
         isGrounded = GroundCheck();
         rBody.velocity = new Vector2(speed, rBody.velocity.y);
+
+
 
         // Jump code
         if (isGrounded && Input.GetAxis("Jump") > 0)

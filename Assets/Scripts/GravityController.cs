@@ -20,8 +20,12 @@ public class GravityController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            // Change gravity for player and flip the player sprite
             rBody.gravityScale *= -1;
             player.GetComponent<PlayerController>().Flip();
+
+            // Shake the camera when gravity changes
+            CameraShaker.Instance.ShakeCamera(5f, 1f);
         }
     }
 }
